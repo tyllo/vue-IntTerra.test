@@ -10,6 +10,10 @@ console.log(environment.parsed)
 module.exports = {
   lintOnSave: false,
 
+  publicPath: isProd
+    ? '/vue-IntTerra.test/'
+    : '/',
+
   pages: {
     index: {
       entry: 'src/main',
