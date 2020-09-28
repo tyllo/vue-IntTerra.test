@@ -2,12 +2,10 @@ import { Routes } from '@/helpers/enums/routes'
 import {
   RouteConfig,
 } from 'vue-router'
-import {
-  OperationTabs,
-} from './utils'
+import { OperationTab } from '@/helpers/enums/OperationTab'
 
 
-const tabs = Object.values(OperationTabs).join('|')
+const tabs = Object.values(OperationTab).join('|')
 
 const createRoutes = (): RouteConfig[] => [
   {

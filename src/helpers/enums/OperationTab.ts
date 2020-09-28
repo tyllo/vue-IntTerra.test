@@ -1,14 +1,14 @@
-export const enum OperationTabs {
+export enum OperationTab {
   planned = 'planned',
   completed = 'completed',
 }
 
-export const getOperationTabLabel = (tab: OperationTabs) => {
+export const getOperationTabLabel = (tab: OperationTab) => {
   switch (tab) {
-    case OperationTabs.planned:
+    case OperationTab.planned:
       return 'Запланированные операции'
 
-    case OperationTabs.completed:
+    case OperationTab.completed:
       return 'Выполненные операции'
 
     default:

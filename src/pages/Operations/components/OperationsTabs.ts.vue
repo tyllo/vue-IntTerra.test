@@ -18,24 +18,24 @@ import {
   Prop,
 } from 'vue-property-decorator'
 import {
-  OperationTabs,
+  OperationTab,
   getOperationTabLabel,
-} from '../utils'
+} from '@/helpers/enums/OperationTab'
 
 
 @Component
 export default class OperationsTabs extends Vue {
   @Prop({
     type: String,
-    default: OperationTabs.planned,
-    validator: (prop) => prop in OperationTabs,
+    default: OperationTab.planned,
+    validator: (prop) => prop in OperationTab,
   })
-  public async current!: OperationTabs
+  public current!: OperationTab;
 
   public get labels() {
     return [
-      OperationTabs.planned,
-      OperationTabs.completed,
+      OperationTab.planned,
+      OperationTab.completed,
     ].map((value) => ({
       value,
       label: getOperationTabLabel(value),
@@ -51,7 +51,7 @@ export default class OperationsTabs extends Vue {
 
   &__item {
     font-size: 11px;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 13px;
     color: inherit;
     text-decoration: none;

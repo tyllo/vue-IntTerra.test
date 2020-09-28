@@ -24,7 +24,6 @@ import chevron from '@/assets/icons/chevron.svg'
 import plusCircle from '@/assets/icons/plus-circle.svg'
 import triangle from '@/assets/icons/triangle.svg'
 import winterWheat from '@/assets/icons/winter-wheat.svg'
-import style from '@/assets/scss/variables.scss'
 
 
 // TODO: recursivly import

@@ -12,7 +12,9 @@
     "prepush": "cross-env NODE_ENV=production npm run lint"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.161",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.20",
     "moment": "^2.29.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.12",

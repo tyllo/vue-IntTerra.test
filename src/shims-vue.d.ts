@@ -21,13 +21,6 @@ declare module '*.svg' {
   export default svg
 }
 
-
-declare module 'vue/types/vue' {
-  interface VueConstructor {
-    readonly _isDestroyed: boolean;
-  }
-}
-
 declare const process: {
   env: {
     BASE_URL: string;

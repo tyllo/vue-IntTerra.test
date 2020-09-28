@@ -16,6 +16,13 @@
         @click="onCreateOperation"
       />
     </div>
+
+    <OperationsTable
+      :data="operations"
+      :filters="filters"
+      class="page-operations__table"
+      @sort="onSort"
+    />
   </div>
 </template>
 
@@ -25,27 +32,71 @@ import {
   Vue,
   Prop,
 } from 'vue-property-decorator'
-import {
-  OperationTabs,
-} from './utils'
-import OperationsTabs from './components/OperationsTabs.ts.vue'
+import { operationsStore } from '@/store/modules/operations'
+import { OperationsFilters } from '@/typings/common'
+import { SortDirection } from '@/helpers/enums/SortDirection'
+import { OperationTab } from '@/helpers/enums/OperationTab'
+
 import FEButtonCreate from '@/components/common/FEButtonCreate.ts.vue'
+import OperationsTabs from './components/OperationsTabs.ts.vue'
+import OperationsTable from './components/OperationsTable.ts.vue'
 
 
 @Component({
   components: {
-    OperationsTabs,
     FEButtonCreate,
+    OperationsTabs,
+    OperationsTable,
   },
 })
 export default class PageOperations extends Vue {
-  @Prop({ tab: String, default: OperationTabs.planned })
-  public tab!: OperationTabs;
+  @Prop({ type: String, default: OperationTab.planned })
+  public tab!: OperationTab;
+
+  public operationsStore = operationsStore.context(this.$store);
+
+  public isLoading = false;
+
+  public get operations() {
+    return this.operationsStore.getters.filteredOperations
+  }
+
+  public get filters() {
+    return this.operationsStore.state.filters
+  }
+
+  private created() {
+    const { filters } = this.operationsStore.state
+    this.fetch({ ...filters, tab: this.tab })
+  }
+
+  public async fetch(filters: OperationsFilters) {
+    this.isLoading = true
+
+    try {
+      await this.operationsStore.actions.getOperations(filters)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+
+    this.isLoading = true
+  }
 
   // eslint-disable-next-line class-methods-use-this
   public onCreateOperation() {
     // eslint-disable-next-line no-console
     console.log('onCreateOperation')
+  }
+
+  public onSort(sort: { key: string; direction: SortDirection }) {
+    const filters: OperationsFilters = {
+      ...this.operationsStore.state.filters,
+      sortKey: sort.key,
+      sortDirection: sort.direction,
+    }
+
+    this.fetch(filters)
   }
 }
 </script>
@@ -57,6 +108,7 @@ export default class PageOperations extends Vue {
   &__table-header {
     display: flex;
     align-items: center;
+    margin: 15px 0;
   }
 
   &__table-tabs {
