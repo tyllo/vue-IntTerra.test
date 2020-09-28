@@ -5,7 +5,9 @@
     </header>
 
     <main class="layout-default__main">
-      <slot />
+      <div class="layout-default__main-inner">
+        <slot />
+      </div>
     </main>
 
     <footer class="layout-default__footer">
@@ -39,16 +41,19 @@ export default class FELayoutDefault extends Vue {
   }
 
   &__main {
-    // display: flex;
+    display: flex;
     flex-grow: 1;
-    // flex-wrap: wrap;
+    align-items: stretch;
     margin-right: 80px;
     margin-left: 80px;
-    background-color: white;
-    box-shadow: $box-shadow;
 
-    > * {
-      min-width: 100%;
+    &-inner {
+      width: 100%;
+      max-width: 1024px;
+      min-height: 100%;
+      margin: 0 auto;
+      background-color: white;
+      box-shadow: $box-shadow;
     }
   }
 

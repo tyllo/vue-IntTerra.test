@@ -1,70 +1,72 @@
 <template>
-  <table
-    class="fe-table"
-  >
-    <thead class="fe-table__thead">
-      <tr class="fe-table__tr">
-        <th
-          v-for="(header, index) in headers"
-          :key="header.name"
-          :width="header.width"
-          :style="[header.style, header.headerStyle]"
-          :class="[
-            header.class,
-            header.headerClass,
-            { 'is-sortable': header.sortable },
-          ]"
-          class="fe-table__th"
-          @click="changeSort(header)"
-        >
-          <slot
-            :name="`th-${header.name}`"
-            :header="header"
-            :index="index"
+  <div class="fe-table">
+    <table
+      class="fe-table__table"
+    >
+      <thead class="fe-table__thead">
+        <tr class="fe-table__tr">
+          <th
+            v-for="(header, index) in headers"
+            :key="header.name"
+            :width="header.width"
+            :style="[header.style, header.headerStyle]"
+            :class="[
+              header.class,
+              header.headerClass,
+              { 'is-sortable': header.sortable },
+            ]"
+            class="fe-table__th"
+            @click="changeSort(header)"
           >
-            {{ header.label }}
-          </slot>
+            <slot
+              :name="`th-${header.name}`"
+              :header="header"
+              :index="index"
+            >
+              {{ header.label }}
+            </slot>
 
-          <FEIcon
-            v-if="header.sortable"
-            size="10px"
-            :class="{
-              'is-active': header.name === sortKey,
-              'fe-rotate-180': sortDirection === 'desc',
-            }"
-            name="triangle"
-            class="fe-table__icon-sort"
-          />
-        </th>
-      </tr>
-    </thead>
+            <FEIcon
+              v-if="header.sortable"
+              size="10px"
+              :class="{
+                'is-active': header.name === sortKey,
+                'fe-rotate-180': sortDirection === 'desc',
+              }"
+              name="triangle"
+              class="fe-table__icon-sort"
+            />
+          </th>
+        </tr>
+      </thead>
 
-    <tbody class="fe-table__tbody">
-      <tr
-        v-for="(item, index) in list"
-        :key="`${item.data[valueKey]}-${index}`"
-        class="fe-table__tr"
-      >
-        <td
-          v-for="header in headers"
-          :key="header.name"
-          :style="header.style"
-          :class="header.class"
-          class="fe-table__td"
+      <tbody class="fe-table__tbody">
+        <tr
+          v-for="(item, index) in list"
+          :key="`${item.data[valueKey]}-${index}`"
+          class="fe-table__tr"
         >
-          <slot
-            :name="`td-${header.name}`"
-            :header="header"
-            :data="item.data"
-            :value="item.values[header.name]"
-            :index="index"
+          <td
+            v-for="header in headers"
+            :key="header.name"
+            :style="header.style"
+            :class="header.class"
+            class="fe-table__td"
           >
-            {{ item.values[header.name] }}
-          </slot>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            <slot
+              :name="`td-${header.name}`"
+              :header="header"
+              :data="item.data"
+              :value="item.values[header.name]"
+              :index="index"
+            >
+              {{ item.values[header.name] }}
+            </slot>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">
@@ -175,9 +177,13 @@ export default class FETable<Data> extends Vue {
 
 <style lang="scss">
 .fe-table {
-  width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
+  overflow-x: auto;
+
+  &__table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+  }
 
   &__th,
   &__td {
