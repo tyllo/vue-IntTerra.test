@@ -13,6 +13,10 @@ import FELayoutDefault from '@/layouts/FELayoutDefault.ts.vue'
 
 
 @Component({
+  components: {
+    FELayoutDefault,
+  },
+})
 export default class App extends Vue {
 }
 </script>

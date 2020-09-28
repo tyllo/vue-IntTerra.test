@@ -1,0 +1,42 @@
+$font-family: 'Ubuntu',
+  -apple-system,
+  'Segoe UI',
+  'Roboto',
+  'Helvetica Neue',
+  'Arial',
+  sans-serif;
+
+$font-size: 13px;
+
+//
+
+$color-brand: #091c28;
+$color-text: #333;
+
+$color-gray-dark: #a7a9ac;
+$color-gray: #edeeee;
+$color-gray-smoke: #f9f9f9;
+
+$color-blue: #39f;
+$color-green: #6c6;
+$color-yellow: #ffe06d;
+$color-red: #ff7360;
+
+$box-shadow: 10px 0 10px rgba(0, 0, 0, 0.1);
+
+//
+
+$transition: 0.5s ease;
+
+//
+
+$header-height: 80px;
+$header-bg-color: $color-brand;
+
+//
+
+:export {
+  // stylelint-disable
+
+  // stylelint-enabled
+}

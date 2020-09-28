@@ -9,6 +9,14 @@ declare module '*.scss' {
   export default styles
 }
 
+declare module '*.svg' {
+  interface SVGSprite {
+    id: string;
+    url: string;
+    viewBox: string;
+    toString: () => string;
+  }
+
   const svg: SVGSprite
   export default svg
 }

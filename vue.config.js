@@ -34,6 +34,13 @@ module.exports = {
     },
   },
 
+  chainWebpack: (config) => {
+    config.module
+      .rule('svg-sprite')
+      .use('svgo-loader')
+      .loader('svgo-loader')
+  },
+
   devServer: {
     host: '0.0.0.0',
     hot: true,
